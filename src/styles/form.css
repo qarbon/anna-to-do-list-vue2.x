@@ -1,0 +1,70 @@
+.text-input, .textarea {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.textarea-box {
+  height: 100px;
+  border: solid 1px #bebaba;
+  padding: 10px;
+}
+
+.select {
+  margin-bottom: 10px;
+}
+
+.date-inputs {
+  display: flex;
+  align-items: flex-end;
+  width: 400px;
+}
+
+.input {
+  height: 30px;
+  border: solid 1px #bebaba;
+  padding: 0 10px;
+}
+
+label {
+  font-size: 20px;
+  margin-bottom: 5px;
+  min-width: 150px;
+  text-align: start;
+  display: flex;
+  align-items: baseline;
+}
+
+::placeholder {
+  text-align: center;
+}
+
+.multiselect {
+  width: 220px;
+  margin-top: 5px;
+}
+
+.multiselect__tags, .multiselect__option--highlight {
+  border-color: #bebaba;
+}
+
+.input-day .input, .input-month .input, .input-year .input {
+  text-align: center;
+}
+.input-day, .input-month {
+  width: 70px;
+  margin-right: 10px;
+}
+
+.input-year {
+  width: 100px;
+}
+.button:disabled {
+  cursor: not-allowed;
+  background-color: #bebaba;
+}
+
+.error {
+  border-color: #ff3300;
+  border-width: 2px;
+}

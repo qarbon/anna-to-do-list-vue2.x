@@ -1,28 +1,41 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="content">
+    <Header/>
+    <TaskList/>
+    <ModalTask v-if="isTaskModalOpen"/>
+    <ModalComments v-if="isCommentModalOpen"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapGetters } from 'vuex';
+import Header from './components/Header.vue'
+import TaskList from './components/TaskList.vue'
+import ModalTask from './components/ModalTask.vue'
+import ModalComments from './components/ModalComment.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Header,
+    TaskList,
+    ModalTask,
+    ModalComments
+  },
+  data() {
+    return {
+    }
+  },
+  computed: {
+    ...mapGetters('task', ['modal_visible', 'modal_type']),
+    isTaskModalOpen() {
+      return this.modal_visible && this.modal_type === 'task';
+    },
+    isCommentModalOpen() {
+      return this.modal_visible && this.modal_type === 'comment';
+    }
+  },
+  methods: {
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

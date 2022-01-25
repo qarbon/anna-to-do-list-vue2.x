@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&family=Oswald:wght@200;400;700&display=swap');
+@import "comment.css";
+@import "form.css";
+@import "modal.css";
+@import "reset.css";
+@import "task.css";
+
+body {
+  background-color: #f0f0f0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  font-family: 'Oswald', sans-serif;
+}
+
+.content {
+  width: 40%;
+  min-width: 700px;
+  height: 80%;
+  background-color: white;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.header {
+  border-bottom: solid 1px #bebaba;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.link {
+  color: #ff3300;
+  text-decoration: underline;
+}
+
+.button {
+  background-color: #ff3300;
+  outline: none;
+  border: none;
+  height: 35px;
+  width: 130px;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 4px;
+  font-family: 'Oswald', sans-serif;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.bold {
+  font-weight: 700;
+  margin: 5px;
+}
+
+.light {
+  color: #bebaba;
+  margin: 5px;
+}
+
+.normal {
+  font-weight: 300;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px #bebaba;
+  padding: 15px 0;
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: 767px) {
+  .content, .comment__box, .modal__content {
+    width: 80%;
+    min-width: 200px;
+  }
+
+  .modal__content {
+    margin-top: 50px;
+  }
+
+  .task__content, .modal__header--text {
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .task__title, .task__date {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+
+  .task__date {
+    justify-content: space-between;
+    width: 100px;
+  }
+
+  .task__date--content {
+    margin: 5px 0;
+  }
+}
