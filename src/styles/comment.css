@@ -1,4 +1,3 @@
-
 .comment__box {
   background-color: #f0f0f0;
   display: flex;
@@ -9,9 +8,13 @@
   align-items: center;
 }
 
+.comment__box .text-input {
+  margin-bottom: 0;
+}
+
 .comment__input {
   width: calc(100% - 140px);
-  margin-bottom: 0;
+
 }
 
 .comment__data {
@@ -27,4 +30,8 @@
 .comment__content {
   max-height: 410px;
   overflow: auto;
+}
+
+.comment__button {
+  margin-bottom: 10px;
 }

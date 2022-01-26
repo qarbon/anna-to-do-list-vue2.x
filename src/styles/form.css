@@ -50,7 +50,13 @@ label {
 
 .input-day .input, .input-month .input, .input-year .input {
   text-align: center;
+  margin-bottom: 0;
 }
+
+.input-day, .input-month, .input-year {
+  margin-bottom: 0;
+}
+
 .input-day, .input-month {
   width: 70px;
   margin-right: 10px;
@@ -59,12 +65,20 @@ label {
 .input-year {
   width: 100px;
 }
-.button:disabled {
-  cursor: not-allowed;
-  background-color: #bebaba;
-}
 
 .error {
   border-color: #ff3300;
   border-width: 2px;
+}
+
+.error__text {
+  color: #ff3300;
+  margin-bottom: 5px;
+  font-size: 12px;
+  margin-top: 5px;
+  height: 15px;
+}
+
+.error__date {
+  margin-top: -15px;
 }

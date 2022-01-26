@@ -17,6 +17,12 @@
           </span>
         </p>
         <p class="bold">
+          Status:
+          <span class="normal">
+            {{ status }}
+          </span>
+        </p>
+        <p class="bold" v-if="priority">
           Priority:
           <span class="normal">
             {{ priority }}
@@ -36,7 +42,7 @@
           v-model="text"
           class="comment__input"
       />
-      <Button @click="addNewComment">Add comment</Button>
+      <Button @click="addNewComment" class="comment__button">Add comment</Button>
     </div>
   </div>
 </template>
@@ -61,6 +67,9 @@ export default {
     ...mapGetters('task', ['single_task']),
     priority() {
       return this.single_task.priority ? this.single_task.priority.name : ''
+    },
+    status() {
+      return this.single_task.done ? 'Done' : 'To do';
     },
     comments() {
       return this.single_task.comments;

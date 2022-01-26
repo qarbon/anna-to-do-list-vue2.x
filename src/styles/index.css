@@ -4,6 +4,7 @@
 @import "modal.css";
 @import "reset.css";
 @import "task.css";
+@import "responsive.css";
 
 body {
   background-color: #f0f0f0;
@@ -52,6 +53,24 @@ h1 {
   font-family: 'Oswald', sans-serif;
 }
 
+.button:disabled {
+  cursor: not-allowed;
+  background-color: #bebaba;
+}
+
+.button--transparent {
+  background-color: transparent;
+  height: 30px;
+  width: 30px;
+  border: solid 1px #bebaba;
+  margin-right: 20px;
+  padding: 0;
+}
+
+.button--transparent .button-content {
+  color: #42b983;
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -76,37 +95,4 @@ h1 {
   border-bottom: solid 1px #bebaba;
   padding: 15px 0;
   margin-bottom: 15px;
-}
-
-@media screen and (max-width: 767px) {
-  .content, .comment__box, .modal__content {
-    width: 80%;
-    min-width: 200px;
-  }
-
-  .modal__content {
-    margin-top: 50px;
-  }
-
-  .task__content, .modal__header--text {
-    flex-direction: column;
-  }
-
-  h1 {
-    font-size: 24px;
-  }
-
-  .task__title, .task__date {
-    margin: 5px 0;
-    font-size: 16px;
-  }
-
-  .task__date {
-    justify-content: space-between;
-    width: 100px;
-  }
-
-  .task__date--content {
-    margin: 5px 0;
-  }
 }

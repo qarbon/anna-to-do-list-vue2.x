@@ -1,7 +1,7 @@
 <template>
   <div class="text-input">
     <label v-if="label" :for="id" class="label">
-      {{label}}
+      {{ label }}
     </label>
     <input
         :class="{ error: error }"
@@ -18,6 +18,7 @@
         @input="handleInput"
         @keydown="handleKeydown"
     />
+    <p class="error__text">{{ error ? 'Field is required' : '' }}</p>
   </div>
 </template>
 
@@ -42,7 +43,7 @@ export default {
       default: 'text',
     },
     error: {
-      type: [Boolean, String, Number],
+      type: [Boolean],
       default: false,
     },
     id: {

@@ -1,5 +1,8 @@
 <template>
   <div class="task">
+    <Button class="button--transparent" @click="changeTaskStatus">
+      <mdicon v-if="task.done" name="check-outline"/>
+    </Button>
     <div class="task__content">
       <p class="task__title">{{task.title}}</p>
       <div class="task__date">
@@ -35,12 +38,15 @@ export default {
     }
   },
   methods: {
-    ...mapActions('task', ['showModal']),
+    ...mapActions('task', ['showModal', 'toggleTaskStatus']),
     openCommentModal() {
       this.showModal({ vm: this, type: 'comment', id: this.task.id });
     },
     openTaskModal() {
       this.showModal({ vm: this, type: 'task', id: this.task.id });
+    },
+    changeTaskStatus() {
+      this.toggleTaskStatus({vm: this, id: this.task.id})
     }
   },
   computed: {

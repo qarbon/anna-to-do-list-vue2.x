@@ -8,7 +8,7 @@
       <Input
           v-model="form.title"
           label="Title *"
-          @blur="() => validation('title')"
+          @blur="() => validateRequired('title')"
           :error="errors.title"
       />
       <TextArea
@@ -20,9 +20,8 @@
             v-model="form.due_date.day"
             label="Set due date *"
             placeholder="DD"
-            :max_length="2"
             class="input-day"
-            @blur="() => validation('day')"
+            @blur="() => validateRequired('day')"
             :error="errors.day"
             :min="1"
             :max="31"
@@ -31,23 +30,24 @@
         <Input
             v-model="form.due_date.month"
             placeholder="MM"
-            :max_length="2"
             class="input-month"
-            @blur="() => validation('month')"
-            :error="errors.month"
+            @blur="() => validateRequired('month')"
             :min="1"
             :max="12"
             type="number"
+            :error="errors.month"
         />
         <Input
             v-model="form.due_date.year"
             placeholder="YYYY"
-            :max_length="4"
             class="input-year"
-            @blur="() => validation('year')"
-            :error="errors.year"
+            @blur="() => validateRequired('year')"
             type="number"
+            :error="errors.year"
         />
+      </div>
+      <div v-if="error_due_date" class="error__date error__text">
+        {{ error_due_date }}
       </div>
       <Select
           v-model="form.priority"
@@ -77,6 +77,13 @@ import Button from '@/components/Button';
 import Select from '@/components/Select';
 import { mapActions, mapGetters } from 'vuex';
 import dayjs from 'dayjs';
+
+const errors_init = {
+  title: false,
+  day: false,
+  month: false,
+  year: false,
+};
 
 const priorities = [
   {
@@ -108,16 +115,18 @@ export default {
           year: null
         },
         priority: 1,
-        comments: []
+        comments: [],
+        done: false
       },
       edit: false,
       not_valid: true,
       errors: {
-        title: false,
-        day: false,
-        month: false,
-        year: false,
-      }
+        title: null,
+        day: null,
+        month: null,
+        year: null,
+      },
+      error_due_date: ''
     }
   },
   computed: {
@@ -131,60 +140,70 @@ export default {
   },
   methods: {
     ...mapActions('task', ['addTask', 'hideModal', 'editTask']),
-    validation(key){
-      if(key === 'day' || key === 'month' || key === 'year') {
+    validateRequired(key) {
+      if (key === 'day' || key === 'month' || key === 'year') {
         this.errors[key] = this.form.due_date[key] === null;
       } else {
         this.errors[key] = this.form[key] === '';
       }
-      if(Object.values(this.errors).every((v) => v === false) && this.form.due_date.day !== null) {
-        this.not_valid = false
+      this.not_valid = !(Object.values(this.errors)
+      .every((v) => v === false) && this.form.due_date.day !== null);
+    },
+    validateDate() {
+      const date = dayjs(`${this.form.due_date.year}-${this.form.due_date.month}-${this.form.due_date.day}`);
+      if (dayjs().isAfter(date) && !dayjs().isSame(date, 'day')) {
+        this.error_due_date = 'Date need to be in the future';
       } else {
-        this.not_valid = true
+        this.error_due_date = '';
       }
     },
     submitForm() {
-      const time = dayjs().format("DD MMM YYYY HH:mm:ss");
-      if(this.form.comments.text) {
-        this.form = {
-          ...this.form,
-          due_date: `${this.form.due_date.day}/${this.form.due_date.month}/${this.form.due_date.year}`,
-          comments: [{
-            text: this.form.comments.text,
-            author: 'You',
-            time: time
-          }]
-        };
-      } else {
-        this.form = {
-          ...this.form,
-          due_date: `${this.form.due_date.day}/${this.form.due_date.month}/${this.form.due_date.year}`,
-        };
-      }
-
-      if (!this.edit) {
-        this.form = {
-          ...this.form,
-          id: this.task_list.length + 1
+      this.validateDate();
+      if (!this.not_valid && !this.error_due_date) {
+        const time = dayjs().format("DD MMM YYYY HH:mm:ss");
+        if (this.form.comments.text) {
+          this.form = {
+            ...this.form,
+            due_date: `${this.form.due_date.day}/${this.form.due_date.month}/${this.form.due_date.year}`,
+            comments: [{
+              text: this.form.comments.text,
+              author: 'You',
+              time: time
+            }]
+          };
+        } else {
+          this.form = {
+            ...this.form,
+            due_date: `${this.form.due_date.day}/${this.form.due_date.month}/${this.form.due_date.year}`,
+          };
         }
+
+        if (!this.edit) {
+          this.form = {
+            ...this.form,
+            id: this.task_list.length + 1
+          }
+        }
+        this.edit ? this.editTask({ vm: this, edited_task: this.form }) : this.addTask({
+          vm: this,
+          task: this.form
+        });
+        this.hideModal({ vm: this, type: '' });
       }
-      this.edit ? this.editTask({ vm: this, edited_task: this.form }) : this.addTask({
-        vm: this,
-        task: this.form
-      });
-      this.hideModal({ vm: this, type: '' });
     }
   },
   mounted() {
     if (this.single_task) {
       this.edit = true;
       const date = this.single_task.due_date.split('/');
+      this.not_valid = false;
       const due_date = {
         day: date[0],
         month: date[1],
         year: date[2],
       }
       this.form = { ...this.single_task, due_date };
+      this.errors = errors_init;
     }
   }
 }

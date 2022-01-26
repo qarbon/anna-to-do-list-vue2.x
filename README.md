@@ -7,6 +7,10 @@ The app allows a user to perform task management actions, including:
 - edit existing task
 - add comments to the task.
 
+### Requirements
+
+- node v16.13.1
+
 ### Project setup
 In order to use the app a user should have a javascript package manager already installed (yarn). Then, from the root dir the user should execute the line below
 ```

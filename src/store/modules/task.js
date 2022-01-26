@@ -31,6 +31,9 @@ const actions = {
   },
   addComment({ commit }, { comment }) {
     commit('ADD_COMMENT', {comment})
+  },
+  toggleTaskStatus({ commit }, { id }) {
+    commit('CHANGE_TASK_STATUS', {id})
   }
 };
 
@@ -44,6 +47,15 @@ const mutations = {
     tasks[index] = {
       ...tasks[index],
       ...edited_task
+    }
+    state.task_list = tasks
+  },
+  CHANGE_TASK_STATUS(state, id) {
+    const tasks = [...state.task_list];
+    const index = tasks.findIndex((el)=> el.id === id.id);
+    tasks[index] = {
+      ...tasks[index],
+      done: !tasks[index].done
     }
     state.task_list = tasks
   },
