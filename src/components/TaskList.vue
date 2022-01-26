@@ -18,7 +18,7 @@ import Task from './Task.vue'
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: "TaskList",
+  name: 'TaskList',
   components: {
     Task
   },
@@ -28,13 +28,8 @@ export default {
   methods: {
     ...mapActions('task', ['showModal']),
     openModal() {
-      this.showModal({ vm: this, type: 'task' });
+      this.showModal({ type: 'task' });
     }
   }
-  // data() {
-  //   return {
-  //     tasks
-  //   };
-  // },
 }
 </script>

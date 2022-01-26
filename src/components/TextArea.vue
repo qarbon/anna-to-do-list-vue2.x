@@ -10,7 +10,6 @@
         @focus="handleFocus"
         @input="handleInput"
         class="textarea-box"
-        id="textarea"
         ref="textarea"
     >
     </textarea>
@@ -24,7 +23,7 @@
 
 <script>
 export default {
-  name: "TextArea",
+  name: 'TextArea',
   props: {
     value: {
       type: String,

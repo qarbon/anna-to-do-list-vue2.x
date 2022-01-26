@@ -12,7 +12,7 @@
 import dayjs from 'dayjs';
 
 export default {
-  name: "Comment",
+  name: 'Comment',
   props: {
     comment: {
       type: Object,

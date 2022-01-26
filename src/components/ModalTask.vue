@@ -100,7 +100,7 @@ const priorities = [
   },
 ]
 export default {
-  name: "ModalTask",
+  name: 'ModalTask',
   components: { Select, Button, TextArea, Input, ButtonClose },
   data() {
     return {
@@ -184,11 +184,8 @@ export default {
             id: this.task_list.length + 1
           }
         }
-        this.edit ? this.editTask({ vm: this, edited_task: this.form }) : this.addTask({
-          vm: this,
-          task: this.form
-        });
-        this.hideModal({ vm: this, type: '' });
+        this.edit ? this.editTask({ edited_task: this.form }) : this.addTask({ task: this.form });
+        this.hideModal({ type: '' });
       }
     }
   },

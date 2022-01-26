@@ -8,11 +8,11 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: "ButtonClose",
+  name: 'ButtonClose',
   methods: {
     ...mapActions('task', ['hideModal']),
     closeModal() {
-      this.hideModal({ vm: this, type: '' });
+      this.hideModal({ type: '' });
     }
   }
 }

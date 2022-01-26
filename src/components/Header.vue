@@ -10,14 +10,14 @@ import { mapActions } from 'vuex';
 import Button from './Button.vue'
 
 export default {
-  name: "Header",
+  name: 'Header',
   components: {
     Button
   },
   methods: {
     ...mapActions('task', ['showModal']),
     openModal() {
-      this.showModal({ vm: this, type: 'task' });
+      this.showModal({ type: 'task' });
     }
   }
 }

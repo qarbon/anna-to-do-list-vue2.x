@@ -56,7 +56,7 @@ import Input from '@/components/Input';
 import dayjs from 'dayjs';
 
 export default {
-  name: "ModalComment",
+  name: 'ModalComment',
   components: { Input, Button, ButtonClose, Comment },
   data() {
     return {
@@ -84,11 +84,11 @@ export default {
         author: 'You',
         time: time
       };
-      this.addComment({ vm: this, comment: this.new_comment });
+      this.addComment({ comment: this.new_comment });
       this.text = ""
     },
     openModal() {
-      this.showModal({ vm: this, type: 'task', id: this.single_task.id });
+      this.showModal({ type: 'task', id: this.single_task.id });
     }
   }
 }

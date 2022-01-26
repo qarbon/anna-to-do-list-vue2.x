@@ -26,30 +26,24 @@ import { mapActions } from 'vuex';
 import Button from '@/components/Button';
 
 export default {
-  name: "Task",
+  name: 'Task',
   components: { Button },
   props: {
     task: {
       type: Object,
     },
   },
-  data() {
-    return {
-    }
-  },
   methods: {
     ...mapActions('task', ['showModal', 'toggleTaskStatus']),
     openCommentModal() {
-      this.showModal({ vm: this, type: 'comment', id: this.task.id });
+      this.showModal({ type: 'comment', id: this.task.id });
     },
     openTaskModal() {
-      this.showModal({ vm: this, type: 'task', id: this.task.id });
+      this.showModal({ type: 'task', id: this.task.id });
     },
     changeTaskStatus() {
-      this.toggleTaskStatus({vm: this, id: this.task.id})
+      this.toggleTaskStatus({ id: this.task.id})
     }
   },
-  computed: {
-  }
 }
 </script>

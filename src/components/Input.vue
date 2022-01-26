@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "Input",
+  name: 'Input',
   props: {
     value: {
       type: [String, Number],
@@ -64,8 +64,7 @@ export default {
   methods: {
     checkMinMax(e) {
       const value = +e.target.value;
-      if (!(this.allowEmpty && !value)) {
-        // eslint-disable-next-line no-nested-ternary
+      if (value) {
         e.target.value = value < this.min ? this.min : value > this.max ? this.max : value;
       }
       return +e.target.value;
